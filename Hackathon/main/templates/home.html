@@ -1,21 +1,22 @@
+{% comment %} load the static css file {% endcomment %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning Platform</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}?ver=1930">
+    <link rel="stylesheet" type ="text/css" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <nav class="main-nav">
         <div class="logo">
-            <h1>LearnHub</h1>
+            <h1>CourseQuest</h1>
         </div>
         <ul class="nav-links">
             <li><a href="#">Courses</a></li>
-            <li><a href="#">Subjects</a></li>
-            <li><a href="#">Practice</a></li>
+            <li><a href="#">Schools</a></li>
+            <li><a href="{% url 'explore' %}">Explore</a></li>
             <li><a href="#">Teachers</a></li>
             <li><button class="login-btn">Login</button></li>
             <li><button class="signup-btn">Sign Up</button></li>
@@ -33,15 +34,42 @@
         <div class="subject-grid">
             <div class="subject-card">
                 <img src="math-icon.png" alt="Mathematics">
-                <h3>Mathematics</h3>
+                <h3>Engineering</h3>
                 <p>Algebra, Geometry, Calculus and more</p>
             </div>
             <div class="subject-card">
                 <img src="science-icon.png" alt="Science">
-                <h3>Science</h3>
+                <h3>Medicine</h3>
                 <p>Physics, Chemistry, Biology</p>
             </div>
         </div>
     </section>
+
+    <section class="featured-courses">
+        <h2>Featured Courses</h2>
+        <div class="course-carousel">
+            {% for course in courses %}
+                <div class="course-card">
+                    <h3>{{ course.title }}</h3>
+                    <p>{{ course.summary }}</p>
+                    <a href="{% url 'course_detail' course.id %}">Learn More</a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="featured-schools">
+        <h2>Featured Schools</h2>
+        <div class="school-carousel">
+            {% for school in schools %}
+                <div class="school-card">
+                    <h3>{{ school.name }}</h3>
+                    <p>{{ school.description }}</p>
+                    <a href="{% url 'school_detail' school.id %}">View School</a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
 </body>
+
 </html>

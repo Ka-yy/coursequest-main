@@ -1,6 +1,5 @@
-from rest_framework import serializers
 from .models import School, Course, Review
-
+from rest_framework import serializers
 # Reviews
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:

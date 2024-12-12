@@ -2,11 +2,11 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-"""
-NOTE: youll need to use jwt tokens for the refresher to use the correct state manegement
-TODO: you cannot define user links without calling these functions from the jwt tokens
+from rest_framework_simplejwt.tokens import RefreshToken
 
- 
+"""
+NOTE: youll need to use jwt tokens for login validations and the refresher to use the correct state manegement
+TODO: you cannot define user links without calling these functions from the jwt tokens
 therefore => 
 # from rest_framework_simplejwt.tokens import RefreshToken
 """
@@ -14,6 +14,15 @@ from django.contrib.auth.hashers import make_password
 from .models import Users
 from .serializers import UserSerializer
 
+
+
+
+def user_dashboard(request):    
+    return render(request, 'user_dashboard.html')
+
+
+class AccountViw (APIView):
+    print("Hello world")
 
 class RegisterView(APIView):
     def post(self, request):
@@ -29,6 +38,24 @@ class RegisterView(APIView):
                 'access': str(refresh.access_token)
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class SIgnUpView(APIView):
+    print("hello world")
+
+# '''
+# For views that we might take seriously later along the line 
+# '''
+# from rest_framework.permissions import IsAuthenticated
+# from rest_framework_simplejwt.authentication import JWTAuthentication
+
+# class ProtectedView(APIView):
+#     authentication_classes = [JWTAuthentication]  # Use JWT Authentication
+#     permission_classes = [IsAuthenticated]  # Require authentication
+
+#     def get(self, request):
+#         content = {'message': 'hehehe login first'}
+#         return Response(content)
+
 
 class LoginView(APIView):
     def post(self, request):

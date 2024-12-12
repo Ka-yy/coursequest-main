@@ -4,6 +4,7 @@ django-cors-headers == 3.13.0
 psycopg2-binary 
 psycopg2  # for postgres 
 django-filter == 22.1
+djangorestframework-simplejwt 
 redis # for chaching support with redis 
 # tensorflow | for machine learning
 #  openai 
