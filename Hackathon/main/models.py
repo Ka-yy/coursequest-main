@@ -7,7 +7,7 @@ class School(models.Model):
     def __str__(self):
         return self.name
 class Course(models.Model):
-    course_id = models.CharField(max_length=20, primary_key=True)
+    course_id = models.CharField(max_length=20, primary_key=True, unique=True, default=100)
     school = models.ForeignKey(School, related_name='courses', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -16,11 +16,11 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
-class Review(models.Model):#-
-        course = models.ForeignKey(Course, related_name='reviews', on_delete=models.CASCADE)#-
+class Review(models.Model):
+        course = models.ForeignKey(Course, related_name='reviews', on_delete=models.CASCADE)
 
 class Class(models.Model):
-    class_id = models.CharField(max_length=20, primary_key=True)
+    class_id = models.CharField(max_length=20, primary_key=True, unique=True, default=100)
     course = models.ForeignKey(Course, related_name='classes', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -29,7 +29,7 @@ class Class(models.Model):
         return f"{self.course.title} - {self.title}"
 
 class Lesson(models.Model):
-    lesson_id = models.CharField(max_length=20, primary_key=True)
+    lesson_id = models.CharField(max_length=20, primary_key=True, unique=True, default=100)
     class_obj = models.ForeignKey(Class, related_name='lessons', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     content = models.TextField()

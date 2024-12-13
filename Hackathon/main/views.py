@@ -41,7 +41,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
 def home(request):
     courses = Course.objects.all()[:5] #get the first 5 courses
     schools = School.objects.all()[:5] #get the
-    return render(request, "home.html", {'courses': courses, "schools":School})
+    return render(request, "home.html", {'courses': Course, "schools":School})
 
 
 def schoolhome(request):

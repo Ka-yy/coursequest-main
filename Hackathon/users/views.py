@@ -21,8 +21,6 @@ def user_dashboard(request):
     return render(request, 'user_dashboard.html')
 
 
-class AccountViw (APIView):
-    print("Hello world")
 
 class RegisterView(APIView):
     def post(self, request):
@@ -39,8 +37,6 @@ class RegisterView(APIView):
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class SIgnUpView(APIView):
-    print("hello world")
 
 # '''
 # For views that we might take seriously later along the line 
