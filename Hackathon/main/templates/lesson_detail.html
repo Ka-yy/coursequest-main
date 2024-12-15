@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ lesson.title }}</h1>
+<div id="lesson-content" hx-get="{% url 'lesson_content' lesson.id %}" hx-trigger="load">
+    <!-- Lesson content will be loaded here -->
+</div>
+{% endblock %}

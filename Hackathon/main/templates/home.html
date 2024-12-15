@@ -2,25 +2,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- ... existing head content ... -->
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning Platform</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">     {% comment %} for glide // the carousel   {% endcomment %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css">     {% comment %} for glide // the carousel  {% endcomment %}
     <link rel="stylesheet" type ="text/css" href="{% static 'css/styles.css' %}">
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>{% comment %} for htmx  {% endcomment %}
 </head>
 <body>
     <nav class="main-nav">
-        <div class="logo">
+        <div class="logo"> 
             <h1>CourseQuest</h1>
         </div>
         <ul class="nav-links">
-            <li><a href="#">Courses</a></li>
+            <li><a href="">Courses</a></li> 
             <li><a href="#">Schools</a></li>
+
             <li><a href="{% url 'explore' %}">Explore</a></li>
             <li><a href="#">Teachers</a></li>  {% comment %}  get rid of this later {% endcomment %}
             <li><button class="login-btn">Login</button></li>
             <li><button class="signup-btn">Sign Up</button></li>
         </ul>
     </nav>
+    
+    <!-- ... existing hero section ... -->
     <header class="hero">
         <div class="hero-content">
             <h1>Learn Anything, Anywhere</h1>
@@ -28,6 +36,8 @@
             <button class="start-learning-btn">Start Learning</button> {% comment %} links to the explore page  {% endcomment %}
         </div>
     </header>
+
+    
     <section class="subjects">
         <h2>Featured Subjects</h2>
         <div class="subject-grid">
@@ -44,37 +54,60 @@
         </div>
     </section>
 
-    {% comment %} a carousel page of some courses at random {% endcomment %}
     <section class="featured-courses">
         <h2>Featured Courses</h2>
-        <div class="course-carousel">
-
-            {% for course in Course %}
-                {% comment %} loop through the courses and show a course foe every course card  {% endcomment %}
-                <div class="course-card">
-                    <h3>{{ course.title }}</h3>
-                    <p>{{ course.summary }}</p>
-                    <a href="{% url 'course_detail' course.id %}">Learn More</a>
-                </div>
-            {% endfor %}
+        <div class="glide">
+            <div class="glide__track" data-glide-el="track">
+                <ul class="glide__slides">
+                    {% for course in courses %}
+                    <li class="glide__slide">
+                        <div class="course-card">
+                            <h3>{{ course.title }}</h3>
+                            <p>{{ course.summary }}</p>
+                            <a href="#">Learn More</a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="glide__arrows" data-glide-el="controls">
+                <button class="glide__arrow glide__arrow--left" data-glide-dir="<">Prev</button>
+                <button class="glide__arrow glide__arrow--right" data-glide-dir=">">Next</button>
+            </div>
         </div>
     </section>
-{% comment %} a carousek of some schools at random  {% endcomment %}
-    <section class="featured-schools">
+    
+    <section class="featured-Schools">
         <h2>Featured Schools</h2>
-        <div class="school-carousel">
-            {% comment %} loop through the schools and show a school for every school card {% endcomment %}
-            {% for school in School %}
-                <div class="school-card">
-                    <h3>{{ school.name }}</h3>
-                    <p>{{ school.description }}</p>
-                    {% comment %} school picture  {% endcomment %}
-                    <a href="{% url 'school_detail' school.id %}">View School</a>
-                </div>
-            {% endfor %}
-            
-        </div>
-    </section>
-</body>
 
-</html>
+
+        <div class="glide">
+            <div class="glide__track" data-glide-el="track">
+                <ul class="glide__slides">
+                    
+                    {% for school in schools %}
+                    <li class="glide__slide">
+                        <div class="course-card">
+                            <h3>{{ school.name }}</h3>
+                            <p>{{ course.summary }}</p>
+                            <a href="#">Learn More</a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div class="glide_arrows" data-glide-el="controls">
+                <button class="glide__arrow glide-arrow--left" data-glide-dir="<">prev</button>
+                <button class="glide__arrow glide-arrow--right" data-glide-dir=">">next</button>
+                
+            <div>
+
+            </div>
+        </div>
+            
+    </section>
+    
+    <!-- ... existing subjects section ... -->
+</body>
+</html>  <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+

@@ -77,5 +77,5 @@ class LoginView(APIView):
 def explore(request):
     return render(request, "explore.html")
 
-def schoolhome(request):
+def schoollist(request):
     return render(request, "course.html")

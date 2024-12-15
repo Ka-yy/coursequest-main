@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ school.name }} - CourseQuest</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="logo"> 
+            <h1>CourseQuest</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Courses</a></li> 
+            <li><a href="{% url 'schools' %}">Schools</a></li>
+            <li><a href="{% url 'explore' %}">Explore</a></li>
+            <li><button class="login-btn">Login</button></li>
+            <li><button class="signup-btn">Sign Up</button></li>
+        </ul>
+    </nav>
+
+    <header class="hero school-hero">
+        <div class="hero-content">
+            <h1>{{ school.name }}</h1>
+            <p>{{ school.description }}</p>
+        </div>
+    </header>
+
+    <section class="school-details">
+        <div class="school-info">
+            <h2>About {{ school.name }}</h2>
+            <p>{{ school.description }}</p>
+        </div>
+    </section>
+
+    <section class="featured-courses">
+        <h2>Courses Offered</h2>
+        <div class="glide">
+            <div class="glide__track" data-glide-el="track">
+                <ul class="glide__slides">
+                    {% for course in school.courses.all %}
+                    <li class="glide__slide">
+                        <div class="course-card">
+                            <h3>{{ course.title }}</h3>
+                            <p>{{ course.summary }}</p>
+                            <a href="{% url 'course_detail' course.course_id %}" class="btn-learn-more">Learn More</a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="glide__arrows" data-glide-el="controls">
+                <button class="glide__arrow glide__arrow--left" data-glide-dir="<">Prev</button>
+                <button class="glide__arrow glide__arrow--right" data-glide-dir=">">Next</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+    <script src="{% static 'js/school_detail.js' %}"></script>
+</body>
+</html>

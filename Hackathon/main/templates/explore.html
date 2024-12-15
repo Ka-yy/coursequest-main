@@ -1,12 +1,172 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explore</title>
+    <title>Explore | CourseQuest</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/explore.css' %}">
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
 </head>
 <body>
-    <h1>Hi there, this is the explore page</h1>
+    <!-- Navigation -->
+    <nav class="explore-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>CourseQuest</h1>
+            </div>
+            <div class="search-container">
+                <input type="text" placeholder="Search courses, schools, subjects..." class="search-input">
+                <button class="search-btn"><i class="bi bi-search"></i></button>
+            </div>
+            <div class="nav-actions">
+                <a href="#" class="filter-toggle"><i class="bi bi-filter"></i> Filters</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Filters Sidebar -->
+    <div class="filters-sidebar">
+        <div class="filter-section">
+            <h3>Subject Areas</h3>
+            <div class="filter-options">
+                <label>
+                    <input type="checkbox" name="subject" value="engineering"> 
+                    Engineering
+                </label>
+                <label>
+                    <input type="checkbox" name="subject" value="medicine"> 
+                    Medicine
+                </label>
+                <label>
+                    <input type="checkbox" name="subject" value="computer-science"> 
+                    Computer Science
+                </label>
+                <label>
+                    <input type="checkbox" name="subject" value="arts"> 
+                    Arts & Humanities
+                </label>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <h3>Learning Type</h3>
+            <div class="filter-options">
+                <label>
+                    <input type="checkbox" name="type" value="online"> 
+                    Online Courses
+                </label>
+                <label>
+                    <input type="checkbox" name="type" value="in-person"> 
+                    In-Person Classes
+                </label>
+                <label>
+                    <input type="checkbox" name="type" value="hybrid"> 
+                    Hybrid Learning
+                </label>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <h3>Skill Level</h3>
+            <div class="filter-options">
+                <label>
+                    <input type="checkbox" name="level" value="beginner"> 
+                    Beginner
+                </label>
+                <label>
+                    <input type="checkbox" name="level" value="intermediate"> 
+                    Intermediate
+                </label>
+                <label>
+                    <input type="checkbox" name="level" value="advanced"> 
+                    Advanced
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="explore-content">
+        <div class="content-header">
+            <h2>Discover Learning Opportunities</h2>
+            <div class="view-toggle">
+                <button class="active" data-view="grid"><i class="bi bi-grid"></i></button>
+                <button data-view="list"><i class="bi bi-list"></i></button>
+            </div>
+        </div>
+
+        <div class="results-container grid-view">
+            <!-- Courses Section -->
+            <section class="results-section">
+                <h3>Recommended Courses</h3>
+                <div class="results-grid">
+                    {% for course in courses %}
+                    <div class="card course-card">
+                        <div class="card-image">
+                            <img src="{{ course.image.url }}" alt="{{ course.title }}">
+                            <div class="card-badge">{{ course.difficulty_level }}</div>
+                        </div>
+                        <div class="card-content">
+                            <h4>{{ course.title }}</h4>
+                            <p>{{ course.short_description }}</p>
+                            <div class="card-meta">
+                                <span><i class="bi bi-clock"></i> {{ course.duration }}</span>
+                                <span><i class="bi bi-mortarboard"></i> {{ course.instructor }}</span>
+                            </div>
+                            <a href="{% url 'course_detail' course.id %}" class="btn btn-primary">Explore Course</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- Schools Section -->
+            <section class="results-section">
+                <h3>Featured Learning Institutions</h3>
+                <div class="results-grid">
+                    {% for school in schools %}
+                    <div class="card school-card">
+                        <div class="card-image">
+                            <img src="{{ school.logo.url }}" alt="{{ school.name }}">
+                        </div>
+                        <div class="card-content">
+                            <h4>{{ school.name }}</h4>
+                            <p>{{ school.short_description }}</p>
+                            <div class="card-meta">
+                                <span><i class="bi bi-geo-alt"></i> {{ school.location }}</span>
+                                <span><i class="bi bi-book"></i> {{ school.course_count }} Courses</span>
+                            </div>
+                            <a href="{% url 'school_detail' school.id %}" class="btn btn-secondary">View School</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="prev-page"><i class="bi bi-chevron-left"></i> Previous</button>
+            <div class="page-numbers">
+                <span class="current-page">1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>...</span>
+                <span>10</span>
+            </div>
+            <button class="next-page">Next <i class="bi bi-chevron-right"></i></button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="explore-footer">
+        <div class="footer-content">
+            <p>&copy; 2024 CourseQuest. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/explore.js' %}"></script>
 </body>
 </html>

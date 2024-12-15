@@ -1,13 +1,56 @@
-{% load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=\, initial-scale=1.0">
-    <title>Courses</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CourseQuest - Courses</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
 </head>
 <body>
-    <h1 style="color: red;">Testing the url for courses</h1>
+    <nav class="main-nav">
+        <div class="logo"> 
+            <h1>CourseQuest</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{% url 'courses' %}" class="active">Courses</a></li> 
+            <li><a href="{% url 'schools' %}">Schools</a></li>
+            <li><a href="{% url 'explore' %}">Explore</a></li>
+            <li><button class="login-btn">Login</button></li>
+            <li><button class="signup-btn">Sign Up</button></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Discover Our Courses</h1>
+            <p>Explore a wide range of learning opportunities</p>
+        </div>
+    </header>
+
+    <section class="featured-courses">
+        <h2>All Courses</h2>
+        <div class="courses-grid">
+            {% for course in courses %}
+            <div class="course-card" data-course-id="{{ course.course_id }}">
+                <div class="course-card-content">
+                    <h3>{{ course.title }}</h3>
+                    <p>{{ course.summary|truncatewords:20 }}</p>
+                    <div class="course-stats">
+                        <span>Classes: {{ course.classes.count }}</span>
+                        <span>School: {{ course.school.name }}</span>
+                    </div>
+                    <a href="{% url 'course_home' course.course_id %}" class="btn-explore">Course Details</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+    <script src="{% static 'js/courses.js' %}"></script>
 </body>
 </html>
-
