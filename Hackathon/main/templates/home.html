@@ -1,5 +1,3 @@
-{% comment %} load the static css file {% endcomment %}
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +16,7 @@
             <li><a href="#">Courses</a></li>
             <li><a href="#">Schools</a></li>
             <li><a href="{% url 'explore' %}">Explore</a></li>
-            <li><a href="#">Teachers</a></li>
+            <li><a href="#">Teachers</a></li>  {% comment %}  get rid of this later {% endcomment %}
             <li><button class="login-btn">Login</button></li>
             <li><button class="signup-btn">Sign Up</button></li>
         </ul>
@@ -27,7 +25,7 @@
         <div class="hero-content">
             <h1>Learn Anything, Anywhere</h1>
             <p>Free world-class education for anyone, anywhere</p>
-            <button class="start-learning-btn">Start Learning</button>
+            <button class="start-learning-btn">Start Learning</button> {% comment %} links to the explore page  {% endcomment %}
         </div>
     </header>
     <section class="subjects">
@@ -35,7 +33,7 @@
         <div class="subject-grid">
             <div class="subject-card">
                 <img src="math-icon.png" alt="Mathematics">
-                <h3>Engineering</h3>
+                <h3>Engineering</h3> 
                 <p>Algebra, Geometry, Calculus and more</p>
             </div>
             <div class="subject-card">
@@ -46,12 +44,13 @@
         </div>
     </section>
 
+    {% comment %} a carousel page of some courses at random {% endcomment %}
     <section class="featured-courses">
         <h2>Featured Courses</h2>
         <div class="course-carousel">
 
             {% for course in Course %}
-
+                {% comment %} loop through the courses and show a course foe every course card  {% endcomment %}
                 <div class="course-card">
                     <h3>{{ course.title }}</h3>
                     <p>{{ course.summary }}</p>
@@ -60,10 +59,11 @@
             {% endfor %}
         </div>
     </section>
-
+{% comment %} a carousek of some schools at random  {% endcomment %}
     <section class="featured-schools">
         <h2>Featured Schools</h2>
         <div class="school-carousel">
+            {% comment %} loop through the schools and show a school for every school card {% endcomment %}
             {% for school in School %}
                 <div class="school-card">
                     <h3>{{ school.name }}</h3>

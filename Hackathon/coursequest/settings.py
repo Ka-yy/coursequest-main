@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'rest_framework',
     "django.contrib.admin",
     "rest_framework_simplejwt",
     "django.contrib.auth",
@@ -40,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'main', # the main application 
-    'users' # where user operations will be defined
+    'users', # where user operations will be defined
+    'rest_framework', # 
 ]
 #  MAKE SURE TO ADD THE CORS HEADERS MIDDLEWARE HERE 
 MIDDLEWARE = [

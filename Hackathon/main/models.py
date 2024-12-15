@@ -19,6 +19,8 @@ class Course(models.Model):
 class Review(models.Model):
         course = models.ForeignKey(Course, related_name='reviews', on_delete=models.CASCADE)
 
+
+# delete this block later
 class Class(models.Model):
     class_id = models.CharField(max_length=20, primary_key=True, unique=True, default=100)
     course = models.ForeignKey(Course, related_name='classes', on_delete=models.CASCADE)
