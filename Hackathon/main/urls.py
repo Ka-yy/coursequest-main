@@ -21,7 +21,7 @@ urlpatterns = [
     # for dynamic routes
     path('course/<int:course_id>/', views.course_detail, name='course_detail'),
     path('schools/<str:school_id>/', views.school_detail, name='school_detail'),
-    path('courses/', views.course_list, name='course_list' ),
+    path('courses/', views.course_list, name='courses' ),
     path('lesson-content/<int:lesson_id>/', views.lesson_content, name='lesson_content'),
     path('class/<strLclass_id>', views.class_details, name='class_detail'),
 ]

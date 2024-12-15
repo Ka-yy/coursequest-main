@@ -11,16 +11,19 @@
 <body>
     <nav class="main-nav">
         <div class="logo"> 
-            <h1>CourseQuest</h1>
+          <a href="{% url  'home' %}">  <h1>CourseQuest</h1>
         </div>
         <ul class="nav-links">
-            <li><a href="{% url 'courses' %}">Courses</a></li> 
+            <li><a href=" {% url 'courses' %}">Courses</a></li> 
             <li><a href="{% url 'schools' %}">Schools</a></li>
+
             <li><a href="{% url 'explore' %}">Explore</a></li>
+            <li><a href="#">Teachers</a></li>  {% comment %}  get rid of this later {% endcomment %}
             <li><button class="login-btn">Login</button></li>
             <li><button class="signup-btn">Sign Up</button></li>
         </ul>
     </nav>
+
 
     <header class="hero class-hero">
         <div class="hero-content">
