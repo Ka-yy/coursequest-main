@@ -69,7 +69,9 @@ class LoginView(APIView):
                 'refresh': str(refresh),
                 'access': str(refresh.access_token)
             })
-        return Response({'error': 'Invalid Username or password'}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        else:    
+            return Response({'error': 'Invalid Username or password'}, status=status.HTTP_401_UNAUTHORIZED)
     def get(self, request): 
         return render(request, "login.html")
  

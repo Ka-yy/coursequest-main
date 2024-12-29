@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Add interactive hover effects to school cards
+    //  interactive hover effects to school cards
     const schoolCards = document.querySelectorAll('.school-card');
     
     schoolCards.forEach(card => {
@@ -11,14 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.remove('hover-effect');
         });
 
-        // Optional: Add click interaction to explore school
+        //  Add  interaction to explore school
         card.addEventListener('click', function() {
             const schoolId = this.dataset.schoolId;
             window.location.href = `/schools/${schoolId}/`;
         });
     });
 
-    // Optional: Search/Filter functionality for schools
+    //  Search/Filter functionality for schools
     const searchInput = document.getElementById('school-search');
     if (searchInput) {
         searchInput.addEventListener('input', function() {
