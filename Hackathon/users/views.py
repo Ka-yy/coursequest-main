@@ -54,11 +54,18 @@ class RegisterView(APIView):
 
 
 class LoginView(APIView):
+    """
+    The bug is coming from here... 
+
+        whatever happens during the login is a product of the htto respose header 
+        the http ERROR 401 IS THE CAUSE OF THE ISSUE 
+
+    """
     def post(self, request):
         username = request.data.get('username')
         password = request.data.get('password')
         # print(password)
-
+        
         user = authenticate(request, username=username, password=password)
         print(password) # for debugging the password
         if user and user.check_password(password):
@@ -70,8 +77,10 @@ class LoginView(APIView):
                 'access': str(refresh.access_token)
             })
         
-        else:    
-            return Response({'error': 'Invalid Username or password'}, status=status.HTTP_401_UNAUTHORIZED)
+        # THE ISSUE IS DOWN HERE 
+        # LOOK AT MEEEEE
+        # else:    
+        #     return Response({'error': 'Invalid Username or password'}, status=status.HTTP_401_UNAUTHORIZED)
     def get(self, request): 
         return render(request, "login.html")
  
